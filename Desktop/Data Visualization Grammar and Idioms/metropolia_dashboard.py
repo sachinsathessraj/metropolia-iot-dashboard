@@ -726,4 +726,10 @@ def create_sensor_table(data):
 if __name__ == '__main__':
     print("Starting Metropolia Smart City IoT Dashboard...")
     print("Open http://localhost:8050 in your browser")
-    app.run(debug=True, host='0.0.0.0', port=8050)
+    
+    # Check if running in production environment
+    import os
+    port = int(os.environ.get('PORT', 8050))
+    debug = os.environ.get('DEBUG', 'False').lower() == 'true'
+    
+    app.run_server(debug=debug, host='0.0.0.0', port=port)
